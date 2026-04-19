@@ -12,4 +12,4 @@ class Node(models.Model):
         return self.name
 
     class Meta:
-        verbose_name = "Устройство"
+        verbose_name = "Node"
