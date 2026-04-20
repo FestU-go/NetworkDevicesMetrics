@@ -13,3 +13,7 @@ class NodeDetailView(RetrieveUpdateAPIView):
     serializer_class = serializers.NodeSerializer
     queryset = models.Node.objects.all()
     lookup_field = "name"
+
+class MetricTypeListView(ListCreateAPIView):
+    serializer_class = serializers.MetricTypeListSerializer
+    queryset = models.MetricType.objects.all()

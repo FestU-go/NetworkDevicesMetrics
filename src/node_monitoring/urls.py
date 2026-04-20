@@ -5,4 +5,5 @@ from node_monitoring import views
 urlpatterns = [
     path("nodes/", views.NodeListView.as_view(), name="node-list-create"),
     path("nodes/<str:name>/", views.NodeDetailView.as_view(), name="node-detail"),
+    path("metric_types/", views.MetricTypeListView.as_view(), name="metric-types-list-create"),
 ]
