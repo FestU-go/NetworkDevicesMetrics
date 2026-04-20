@@ -4,20 +4,31 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('node_monitoring', '0002_alter_node_options'),
+        ("node_monitoring", "0002_alter_node_options"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='node',
-            name='expected_cpu_name',
-            field=models.CharField(blank=True, choices=[('Intel', 'Intel'), ('AMD', 'AMD')], default='', max_length=100, verbose_name='Название процессора'),
+            model_name="node",
+            name="expected_cpu_name",
+            field=models.CharField(
+                blank=True,
+                choices=[("Intel", "Intel"), ("AMD", "AMD")],
+                default="",
+                max_length=100,
+                verbose_name="Название процессора",
+            ),
         ),
         migrations.AlterField(
-            model_name='node',
-            name='expected_os_name',
-            field=models.CharField(blank=True, choices=[('Linux', 'Linux'), ('Windows', 'Windows')], default='', max_length=100, verbose_name='Название ОС'),
+            model_name="node",
+            name="expected_os_name",
+            field=models.CharField(
+                blank=True,
+                choices=[("Linux", "Linux"), ("Windows", "Windows")],
+                default="",
+                max_length=100,
+                verbose_name="Название ОС",
+            ),
         ),
     ]

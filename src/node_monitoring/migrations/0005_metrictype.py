@@ -5,22 +5,29 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('node_monitoring', '0004_alter_node_max_cpu_load'),
+        ("node_monitoring", "0004_alter_node_max_cpu_load"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='MetricType',
+            name="MetricType",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=100, unique=True, verbose_name='Название метрики')),
-                ('display_name', models.CharField(max_length=100, verbose_name='Отображаемое название метрики')),
-                ('collect_interval_minutes', models.IntegerField(validators=[django.core.validators.MinValueValidator(1, message='Интервал должен быть больше 0')], verbose_name='Интервал сбора (минуты)')),
+                ("id", models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
+                ("name", models.CharField(max_length=100, unique=True, verbose_name="Название метрики")),
+                ("display_name", models.CharField(max_length=100, verbose_name="Отображаемое название метрики")),
+                (
+                    "collect_interval_minutes",
+                    models.IntegerField(
+                        validators=[
+                            django.core.validators.MinValueValidator(1, message="Интервал должен быть больше 0")
+                        ],
+                        verbose_name="Интервал сбора (минуты)",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'MetricType',
+                "verbose_name": "MetricType",
             },
         ),
     ]
