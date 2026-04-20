@@ -28,5 +28,5 @@
         "name": "test_metric",
         "display_name": "Тестовая метрика",
         "collect_interval_minutes": 123
-    },
+    }
 ]
