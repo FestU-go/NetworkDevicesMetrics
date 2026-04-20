@@ -30,3 +30,19 @@ class Node(models.Model):
 
     class Meta:
         verbose_name = "Node"
+
+
+
+class MetricType(models.Model):
+    name = models.CharField(max_length=100, unique=True, verbose_name="Название метрики")
+    display_name = models.CharField(max_length=100, verbose_name="Отображаемое название метрики")
+    collect_interval_minutes = models.IntegerField(
+        validators=[MinValueValidator(1, message="Интервал должен быть больше 0")],
+        verbose_name="Интервал сбора (минуты)"
+    )
+
+    def __str__(self):
+        return f"name: {self.name}, display_name: {self.display_name}"
+
+    class Meta:
+        verbose_name = "MetricType"
