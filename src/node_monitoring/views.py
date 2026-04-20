@@ -1,5 +1,5 @@
 from rest_framework.generics import (
-    ListCreateAPIView, RetrieveUpdateAPIView,
+    ListCreateAPIView, RetrieveUpdateDestroyAPIView,
 )
 
 from node_monitoring import models
@@ -9,11 +9,16 @@ class NodeListView(ListCreateAPIView):
     serializer_class = serializers.NodeListSerializer
     queryset = models.Node.objects.all()
 
-class NodeDetailView(RetrieveUpdateAPIView):
-    serializer_class = serializers.NodeSerializer
+class NodeDetailView(RetrieveUpdateDestroyAPIView):
+    serializer_class = serializers.NodeDetailSerializer
     queryset = models.Node.objects.all()
     lookup_field = "name"
 
 class MetricTypeListView(ListCreateAPIView):
     serializer_class = serializers.MetricTypeListSerializer
     queryset = models.MetricType.objects.all()
+
+class MetricTypeDetailView(RetrieveUpdateDestroyAPIView):
+    serializer_class = serializers.MetricTypeDetailSerializer
+    queryset = models.MetricType.objects.all()
+    lookup_field = "name"
