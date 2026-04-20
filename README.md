@@ -24,12 +24,12 @@
 
 | Метод | URL | Описание |
 |-------|-----|----------|
-| GET | /api/nodes/ | Список всех узлов |
-| POST | /api/nodes/ | Создать новый узел |
-| GET | /api/nodes/{name}/ | Детали узла |
-| PUT/PATCH | /api/nodes/{name}/ | Обновить узел |
-| GET | /api/metric-types/ | Список типов метрик |
-| POST | /api/metric-types/ | Создать новый тип метрики |
-| GET | /api/metric-types/{name}/ | Детали типа метрики |
-| PUT/PATCH | /api/metric-types/{name}/ | Обновить тип метрики |
-| DELETE | /api/metric-types/{name}/ | Удалить тип метрики |
+| GET | /api/nodes/ | Список всех устройств |
+| POST | /api/nodes/ | Создать новое устройство |
+| GET | /api/nodes/{name}/ | Детали устройства |
+| PUT/PATCH | /api/nodes/{name}/ | Обновить данные устройства |
+| GET | /api/metric-types/ | Список метрик |
+| POST | /api/metric-types/ | Создать новую метрику |
+| GET | /api/metric-types/{name}/ | Детали метрики |
+| PUT/PATCH | /api/metric-types/{name}/ | Обновить данные метрики |
+| DELETE | /api/metric-types/{name}/ | Удалить метрику |
