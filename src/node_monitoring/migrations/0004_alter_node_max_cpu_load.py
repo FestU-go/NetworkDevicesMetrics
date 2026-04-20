@@ -5,15 +5,21 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('node_monitoring', '0003_alter_node_expected_cpu_name_and_more'),
+        ("node_monitoring", "0003_alter_node_expected_cpu_name_and_more"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='node',
-            name='max_cpu_load',
-            field=models.FloatField(default=80.0, validators=[django.core.validators.MinValueValidator(0.0), django.core.validators.MaxValueValidator(100.0)], verbose_name='Максимальная допустимая нагрузка CPU (%)'),
+            model_name="node",
+            name="max_cpu_load",
+            field=models.FloatField(
+                default=80.0,
+                validators=[
+                    django.core.validators.MinValueValidator(0.0),
+                    django.core.validators.MaxValueValidator(100.0),
+                ],
+                verbose_name="Максимальная допустимая нагрузка CPU (%)",
+            ),
         ),
     ]

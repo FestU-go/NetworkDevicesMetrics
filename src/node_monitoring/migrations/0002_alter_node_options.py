@@ -4,14 +4,13 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('node_monitoring', '0001_initial'),
+        ("node_monitoring", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='node',
-            options={'verbose_name': 'Node'},
+            name="node",
+            options={"verbose_name": "Node"},
         ),
     ]
