@@ -1,0 +1,32 @@
+[
+    {
+        "name": "cpu_name",
+        "display_name": "Название процессора",
+        "collect_interval_minutes": 1440
+    },
+    {
+        "name": "cpu_load",
+        "display_name": "Нагрузка CPU",
+        "collect_interval_minutes": 5
+    },
+    {
+        "name": "os_name",
+        "display_name": "Название ОС",
+        "collect_interval_minutes": 720
+    },
+    {
+        "name": "free_disk",
+        "display_name": "Свободный диск (ГБ)",
+        "collect_interval_minutes": 60
+    },
+    {
+        "name": "ram_load",
+        "display_name": "Нагрузка оперативной памяти",
+        "collect_interval_minutes": 10
+    },
+    {
+        "name": "test_metric",
+        "display_name": "Тестовая метрика",
+        "collect_interval_minutes": 123
+    },
+]
