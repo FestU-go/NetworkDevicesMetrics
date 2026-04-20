@@ -4,13 +4,23 @@ from node_monitoring.models import MetricType, Node
 
 
 class NodeDetailSerializer(serializers.ModelSerializer):
+    """
+    Сериализатор для детальной информации об устройстве
+    """
+
     class Meta:
         model = Node
         fields = ["id", "name", "expected_os_name", "expected_cpu_name", "max_cpu_load", "min_free_disk_gb"]
-        read_only_fields = ["id"]
+        read_only_fields = [
+            "id",
+        ]
 
 
 class NodeListSerializer(serializers.ModelSerializer):
+    """
+    Сериализатор для списка устройств
+    """
+
     url = serializers.HyperlinkedIdentityField(
         view_name="node-detail", read_only=True, lookup_field="name", lookup_url_kwarg="name"
     )
@@ -18,10 +28,16 @@ class NodeListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Node
         fields = ["url", "id", "name", "expected_os_name", "expected_cpu_name", "max_cpu_load", "min_free_disk_gb"]
-        read_only_fields = ["id"]
+        read_only_fields = [
+            "id",
+        ]
 
 
 class MetricTypeDetailSerializer(serializers.ModelSerializer):
+    """
+    Сериализатор для детальной информации о метрике
+    """
+
     class Meta:
         model = MetricType
         fields = [
@@ -34,6 +50,10 @@ class MetricTypeDetailSerializer(serializers.ModelSerializer):
 
 
 class MetricTypeListSerializer(serializers.ModelSerializer):
+    """
+    Сериализатор для списка метрик
+    """
+
     url = serializers.HyperlinkedIdentityField(
         view_name="metric_types-detail", read_only=True, lookup_field="name", lookup_url_kwarg="name"
     )

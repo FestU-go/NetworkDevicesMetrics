@@ -14,22 +14,27 @@ DEFAULT_DATA = [
 
 
 class Command(BaseCommand):
+    """Команда для загрузки типов метрик в базу данных"""
+
     help = "Загружает типы метрик из fixtures/metric_types.json или использует значения по умолчанию (DEFAULT_DATA)"
 
-    def _get_data(self):
+    def _get_data(self) -> list[dict]:
+        """Возвращает список словарей с данными метрик"""
+
         file_path = Path(__file__).resolve().parent.parent.parent / "fixtures" / "metric_types.json"
         try:
             with open(file_path, encoding="utf-8") as f:
                 data = json.load(f)
             self.stdout.write(self.style.SUCCESS(f"Загружено из {file_path}"))
             return data
-        except (OSError, FileNotFoundError, json.JSONDecodeError) as e:
+        except (OSError, json.JSONDecodeError) as e:
             self.stdout.write(
                 self.style.WARNING(f"Не удалось загрузить {file_path}: {e}. Будут загружены значения по умолчанию.")
             )
             return DEFAULT_DATA
 
-    def handle(self, *args, **options):
+    def handle(self, *args, **options) -> None:
+        """Функция загрузки метрик в БД"""
         data = self._get_data()
         for item in data:
             try:

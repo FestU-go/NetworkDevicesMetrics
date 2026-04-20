@@ -3,6 +3,8 @@ from django.db import models
 
 
 class Node(models.Model):
+    """Модель сетевого устройства для мониторинга"""
+
     LINUX_OS = "Linux"
     WINDOWS_OS = "Windows"
 
@@ -41,6 +43,8 @@ class Node(models.Model):
 
 
 class MetricType(models.Model):
+    """Модель метрики, по которой можно отслеживать устройства"""
+
     name = models.CharField(max_length=100, unique=True, verbose_name="Название метрики")
     display_name = models.CharField(max_length=100, verbose_name="Отображаемое название метрики")
     collect_interval_minutes = models.IntegerField(
