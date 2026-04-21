@@ -1,9 +1,12 @@
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import status
 from rest_framework.generics import (
+    CreateAPIView,
     ListAPIView,
     ListCreateAPIView,
     RetrieveUpdateDestroyAPIView,
 )
+from rest_framework.response import Response
 
 from node_monitoring import models, pagination, serializers
 from node_monitoring.filters import CustomOrderingFilter, NodeMetricHistoryFilter
@@ -73,11 +76,11 @@ class NodeMetricHistoryListView(ListAPIView):
     - GET: Возвращает список записей (NodeMetricHistory)
 
     Поддерживаемые фильтры (через query parameters):
-    - node: точное имя узла
-    - metric_type: точное имя типа метрики
+    - node: точное название устройства
+    - metric_type: точное название метрики
     - is_valid: true/false
-    - created_at_gte: дата и время
-    - created_at_lte: дата и время
+    - created_at_gte: дата и время (не ранее)
+    - created_at_lte: дата и время (не позднее)
     """
 
     serializer_class = serializers.NodeMetricHistoryListSerializer
@@ -90,3 +93,32 @@ class NodeMetricHistoryListView(ListAPIView):
     filterset_class = NodeMetricHistoryFilter
     ordering_fields = ["created_at"]
     ordering = ["-created_at"]
+
+
+class NodeMetricHistoryCreateView(CreateAPIView):
+    """
+    Представление для создания новой записи истории мониторинга.
+
+    Поддерживаемые методы:
+    - POST: Создаёт новую запись истории
+    """
+
+    serializer_class = serializers.NodeMetricHistoryCreateSerializer
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        node = models.Node.objects.get(name=serializer.validated_data["node_name"])
+        metric_type = models.MetricType.objects.get(name=serializer.validated_data["metric_type_name"])
+        value = serializer.validated_data["value"]
+
+        history = models.NodeMetricHistory.objects.create(
+            node=node,
+            metric_type=metric_type,
+            value=value,
+            is_valid=True,
+            validation_message="",
+        )
+        output_serializer = serializers.NodeMetricHistoryListSerializer(instance=history)
+        return Response(output_serializer.data, status=status.HTTP_201_CREATED)

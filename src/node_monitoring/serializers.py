@@ -113,3 +113,21 @@ class NodeMetricHistoryListSerializer(serializers.ModelSerializer):
             "is_valid",
             "validation_message",
         ]
+
+
+class NodeMetricHistoryCreateSerializer(serializers.Serializer):
+    """Серелизатор для создания новой записи в списке NodeMetricHistory"""
+
+    node_name = serializers.CharField(max_length=100)
+    metric_type_name = serializers.CharField(max_length=100)
+    value = serializers.CharField(max_length=255)
+
+    def validate_node_name(self, value):
+        if not models.Node.objects.filter(name=value).exists():
+            raise serializers.ValidationError(f"Устройство '{value}' не найдено")
+        return value
+
+    def validate_metric_type_name(self, value):
+        if not models.MetricType.objects.filter(name=value).exists():
+            raise serializers.ValidationError(f"Метрика '{value}' не найдена")
+        return value

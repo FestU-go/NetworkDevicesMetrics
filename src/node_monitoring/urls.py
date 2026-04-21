@@ -8,4 +8,5 @@ urlpatterns = [
     path("metric_types/", views.MetricTypeListView.as_view(), name="metric-types-list-create"),
     path("metric_types/<str:name>/", views.MetricTypeDetailView.as_view(), name="metric_types-detail"),
     path("history/", views.NodeMetricHistoryListView.as_view(), name="history-list"),
+    path("history/create/", views.NodeMetricHistoryCreateView.as_view(), name="history-create"),
 ]
