@@ -38,3 +38,5 @@
 | GET | /api/metric-types/{name}/ | Детали метрики |
 | PUT/PATCH | /api/metric-types/{name}/ | Обновить данные метрики |
 | DELETE | /api/metric-types/{name}/ | Удалить метрику |
+| GET | /api/history/ | Список всех записей мониторинга устройств |
+| POST | /api/history/create/ | Создать новую запись в списке записей мониторинга устройств |
