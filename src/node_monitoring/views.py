@@ -1,9 +1,10 @@
 from rest_framework.generics import (
+    ListAPIView,
     ListCreateAPIView,
     RetrieveUpdateDestroyAPIView,
 )
 
-from node_monitoring import models, serializers
+from node_monitoring import models, pagination, serializers
 
 
 class NodeListView(ListCreateAPIView):
@@ -60,3 +61,16 @@ class MetricTypeDetailView(RetrieveUpdateDestroyAPIView):
     serializer_class = serializers.MetricTypeDetailSerializer
     queryset = models.MetricType.objects.all()
     lookup_field = "name"
+
+
+class NodeMetricHistoryListView(ListAPIView):
+    """
+    Представление для получения списка записей истории мониторинга
+
+    Поддерживаемые методы:
+    - GET: Возвращает список записей (NodeMetricHistory)
+    """
+
+    serializer_class = serializers.NodeMetricHistoryListSerializer
+    queryset = models.NodeMetricHistory.objects.all()
+    pagination_class = pagination.ResultsPagination
