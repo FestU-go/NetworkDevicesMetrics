@@ -1,3 +1,4 @@
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.generics import (
     ListAPIView,
     ListCreateAPIView,
@@ -5,6 +6,7 @@ from rest_framework.generics import (
 )
 
 from node_monitoring import models, pagination, serializers
+from node_monitoring.filters import CustomOrderingFilter, NodeMetricHistoryFilter
 
 
 class NodeListView(ListCreateAPIView):
@@ -69,8 +71,22 @@ class NodeMetricHistoryListView(ListAPIView):
 
     Поддерживаемые методы:
     - GET: Возвращает список записей (NodeMetricHistory)
+
+    Поддерживаемые фильтры (через query parameters):
+    - node: точное имя узла
+    - metric_type: точное имя типа метрики
+    - is_valid: true/false
+    - created_at_gte: дата и время
+    - created_at_lte: дата и время
     """
 
     serializer_class = serializers.NodeMetricHistoryListSerializer
     queryset = models.NodeMetricHistory.objects.all()
     pagination_class = pagination.ResultsPagination
+    filter_backends = [
+        DjangoFilterBackend,
+        CustomOrderingFilter,
+    ]
+    filterset_class = NodeMetricHistoryFilter
+    ordering_fields = ["created_at"]
+    ordering = ["-created_at"]
