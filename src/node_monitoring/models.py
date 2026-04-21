@@ -57,3 +57,22 @@ class MetricType(models.Model):
 
     class Meta:
         verbose_name = "MetricType"
+
+
+class NodeMetricHistory(models.Model):
+    """Модель для журналирования истории мониторинга Node по MetricType"""
+
+    node = models.ForeignKey(Node, on_delete=models.CASCADE, related_name="metric_history", verbose_name="Устройство")
+    metric_type = models.ForeignKey(MetricType, on_delete=models.CASCADE, verbose_name="Метрика")
+    value = models.CharField(max_length=255, verbose_name="Текущее значение метрики")
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Время создания")
+    is_valid = models.BooleanField(default=False, verbose_name="Успешность")
+    validation_message = models.CharField(max_length=255, blank=True, verbose_name="Дополнительная информация")
+
+    class Meta:
+        verbose_name = "История метрики"
+        verbose_name_plural = "Истории метрик"
+        indexes = [
+            models.Index(fields=["node", "metric_type", "-created_at"]),
+            models.Index(fields=["-created_at"]),
+        ]
