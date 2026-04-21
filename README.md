@@ -26,6 +26,9 @@
 | Метод | URL | Описание |
 |-------|-----|----------|
 | GET | /su/ | Панель администратора Django |
+| GET | /api/schema/ | API документация в формате JSON/YAML |
+| GET | /api/swagger/ | API документация в формате Swagger-UI |
+| GET | /api/redoc/ | API документация в формате ReDoc |
 | GET | /api/nodes/ | Список всех устройств |
 | POST | /api/nodes/ | Создать новое устройство |
 | GET | /api/nodes/{name}/ | Детали устройства |
