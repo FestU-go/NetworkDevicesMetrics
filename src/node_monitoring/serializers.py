@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from node_monitoring.models import MetricType, Node
+from node_monitoring import models
 
 
 class NodeDetailSerializer(serializers.ModelSerializer):
@@ -9,8 +9,15 @@ class NodeDetailSerializer(serializers.ModelSerializer):
     """
 
     class Meta:
-        model = Node
-        fields = ["id", "name", "expected_os_name", "expected_cpu_name", "max_cpu_load", "min_free_disk_gb"]
+        model = models.Node
+        fields = [
+            "id",
+            "name",
+            "expected_os_name",
+            "expected_cpu_name",
+            "max_cpu_load",
+            "min_free_disk_gb",
+        ]
         read_only_fields = [
             "id",
         ]
@@ -26,8 +33,16 @@ class NodeListSerializer(serializers.ModelSerializer):
     )
 
     class Meta:
-        model = Node
-        fields = ["url", "id", "name", "expected_os_name", "expected_cpu_name", "max_cpu_load", "min_free_disk_gb"]
+        model = models.Node
+        fields = [
+            "url",
+            "id",
+            "name",
+            "expected_os_name",
+            "expected_cpu_name",
+            "max_cpu_load",
+            "min_free_disk_gb",
+        ]
         read_only_fields = [
             "id",
         ]
@@ -39,14 +54,16 @@ class MetricTypeDetailSerializer(serializers.ModelSerializer):
     """
 
     class Meta:
-        model = MetricType
+        model = models.MetricType
         fields = [
             "id",
             "name",
             "display_name",
             "collect_interval_minutes",
         ]
-        read_only_fields = ["id"]
+        read_only_fields = [
+            "id",
+        ]
 
 
 class MetricTypeListSerializer(serializers.ModelSerializer):
@@ -59,7 +76,7 @@ class MetricTypeListSerializer(serializers.ModelSerializer):
     )
 
     class Meta:
-        model = MetricType
+        model = models.MetricType
         fields = [
             "url",
             "id",
@@ -67,4 +84,31 @@ class MetricTypeListSerializer(serializers.ModelSerializer):
             "display_name",
             "collect_interval_minutes",
         ]
-        read_only_fields = ["id"]
+        read_only_fields = [
+            "id",
+        ]
+
+
+class NodeMetricHistoryListSerializer(serializers.ModelSerializer):
+    """Серелизатор для списка записей (NodeMetricHistory)"""
+    node = NodeDetailSerializer(read_only=True)
+    metric_type = MetricTypeDetailSerializer(read_only=True)
+
+    class Meta:
+        model = models.NodeMetricHistory
+        fields = [
+            "id",
+            "node",
+            "metric_type",
+            "value",
+            "created_at",
+            "is_valid",
+            "validation_message",
+        ]
+        read_only_fields = [
+            "id",
+            "value",
+            "created_at",
+            "is_valid",
+            "validation_message",
+        ]
