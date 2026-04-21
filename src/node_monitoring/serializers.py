@@ -91,6 +91,7 @@ class MetricTypeListSerializer(serializers.ModelSerializer):
 
 class NodeMetricHistoryListSerializer(serializers.ModelSerializer):
     """Серелизатор для списка записей (NodeMetricHistory)"""
+
     node = NodeDetailSerializer(read_only=True)
     metric_type = MetricTypeDetailSerializer(read_only=True)
 
