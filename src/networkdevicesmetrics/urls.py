@@ -1,15 +1,18 @@
 from django.contrib import admin
-from django.urls import include, path
 from django.http import JsonResponse
+from django.urls import include, path
 from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
 
 
 def root_view(request):
-    return JsonResponse({
-        "service": "node_monitoring",
-        "docs": "/api/swagger/",
-        "redoc": "/api/redoc/",
-    })
+    return JsonResponse(
+        {
+            "service": "node_monitoring",
+            "docs": "/api/swagger/",
+            "redoc": "/api/redoc/",
+        }
+    )
+
 
 urlpatterns = [
     path("", root_view, name="root"),
