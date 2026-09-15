@@ -12,3 +12,6 @@ exclude = [
 select = ["E", "W", "F", "I", "UP", "B", "C4", "SIM"]
 ignore = ["E501", "B008"]
 fixable = ["ALL"]
+
+[lint.per-file-ignores]
+"src/networkdevicesmetrics/settings/*.py" = ["F403", "F405"]
